@@ -19,7 +19,7 @@ jobs:
   kick_tuxsuite_defconfigs:
     name: TuxSuite (defconfigs)
     runs-on: ubuntu-20.04
-    container: tuxsuite/tuxsuite
+    container: vishalbhoj/tuxsuite
     env:
       TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
     steps:
