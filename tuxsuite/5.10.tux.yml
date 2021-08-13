@@ -18,6 +18,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -30,6 +31,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -41,6 +43,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -54,6 +57,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
@@ -64,6 +68,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -107,6 +112,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: mips
@@ -121,6 +127,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: powerpc
@@ -133,6 +140,21 @@ sets:
     kernel_image: uImage
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: powerpc
+    toolchain: clang-nightly
+    kconfig: pseries_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: powerpc
@@ -145,13 +167,12 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: riscv
     toolchain: clang-nightly
-    kconfig:
-    - defconfig
-    - CONFIG_EFI=n
+    kconfig: defconfig
     targets:
     - config
     - kernel
@@ -170,10 +191,211 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: x86_64
     toolchain: clang-nightly
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: multi_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    - dtbs
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: aspeed_g5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    - dtbs
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: multi_v7_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-13
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_THUMB2_KERNEL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: i386
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: mips
+    toolchain: clang-13
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: mips
+    toolchain: clang-13
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: ppc44x_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: uImage
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: pseries_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: powernv_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: riscv
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LD: riscv64-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: s390
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: x86_64
+    toolchain: clang-13
     kconfig: defconfig
     targets:
     - config
@@ -194,6 +416,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -206,6 +429,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -217,6 +441,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -230,6 +455,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
@@ -240,6 +466,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -270,6 +497,7 @@ sets:
     make_variables:
       LD: mips-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: mips
@@ -284,6 +512,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: powerpc
@@ -296,6 +525,21 @@ sets:
     kernel_image: uImage
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: powerpc
+    toolchain: clang-12
+    kconfig: pseries_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: powerpc
@@ -308,6 +552,7 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: riscv
@@ -333,6 +578,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: x86_64
@@ -357,6 +604,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -369,6 +617,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -380,6 +629,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -393,6 +643,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
@@ -403,6 +654,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -433,6 +685,7 @@ sets:
     make_variables:
       LD: mips-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: mips
@@ -447,6 +700,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: powerpc
@@ -459,6 +713,7 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: riscv
@@ -484,6 +739,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: x86_64
@@ -509,6 +766,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -532,6 +790,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
@@ -542,6 +801,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -566,6 +826,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -607,6 +868,116 @@ sets:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+    git_ref: linux-5.10.y
+    target_arch: arm
     toolchain: clang-12
     kconfig: allmodconfig
     targets:
@@ -615,6 +986,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -626,6 +998,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -637,6 +1010,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
@@ -647,6 +1021,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -671,6 +1046,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -720,6 +1096,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -731,6 +1108,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm
@@ -742,6 +1120,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
     git_ref: linux-5.10.y
     target_arch: arm64
@@ -752,6 +1131,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -776,6 +1156,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git

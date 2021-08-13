@@ -31,6 +31,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -59,6 +60,45 @@ sets:
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
     target_arch: arm64
     toolchain: clang-nightly
     kconfig: defconfig
@@ -67,6 +107,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -95,6 +136,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -104,6 +146,86 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_CFI_CLANG=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_SW_TAGS=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: hexagon
+    toolchain: clang-nightly
+    kconfig: defconfig
     targets:
     - config
     - kernel
@@ -138,6 +260,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -152,6 +275,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -164,6 +288,21 @@ sets:
     kernel_image: uImage
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-nightly
+    kconfig: pseries_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -176,20 +315,18 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: riscv
     toolchain: clang-nightly
-    kconfig:
-    - defconfig
-    - CONFIG_EFI=n
+    kconfig: defconfig
     targets:
     - config
     - kernel
     - modules
     kernel_image: Image
     make_variables:
-      LD: riscv64-linux-gnu-ld
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -201,6 +338,8 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -234,6 +373,474 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_KCSAN=y
+    - CONFIG_KCSAN_KUNIT_TEST=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: multi_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    - dtbs
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: aspeed_g5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    - dtbs
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: multi_v7_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_THUMB2_KERNEL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_CFI_CLANG=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_SW_TAGS=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: hexagon
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: mips
+    toolchain: clang-13
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: mips
+    toolchain: clang-13
+    kconfig:
+    - malta_defconfig
+    - CONFIG_BLK_DEV_INITRD=y
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: ppc44x_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: uImage
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: pseries_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: powernv_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: riscv
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: s390
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_FULL=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_KCSAN=y
+    - CONFIG_KCSAN_KUNIT_TEST=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
     targets:
     - config
     - kernel
@@ -253,6 +860,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -265,6 +873,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -276,6 +885,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -289,6 +899,46 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -299,6 +949,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -313,6 +964,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -322,6 +974,86 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_LTO_CLANG_THIN=y
+    - CONFIG_CFI_CLANG=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_SW_TAGS=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: hexagon
+    toolchain: clang-12
+    kconfig: defconfig
     targets:
     - config
     - kernel
@@ -357,6 +1089,7 @@ sets:
     make_variables:
       LD: mips-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -371,6 +1104,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -383,6 +1117,21 @@ sets:
     kernel_image: uImage
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-12
+    kconfig: pseries_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: vmlinux
+    make_variables:
+      LD: powerpc64le-linux-gnu-ld
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -395,6 +1144,7 @@ sets:
     kernel_image: zImage.epapr
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: riscv
@@ -411,15 +1161,6 @@ sets:
       LD: riscv64-linux-gnu-ld
       LLVM: 1
       LLVM_IAS: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: s390
-    toolchain: clang-12
-    kconfig: defconfig
-    targets:
-    - config
-    - kernel
-    - modules
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -453,6 +1194,53 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_KCSAN=y
+    - CONFIG_KCSAN_KUNIT_TEST=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
     targets:
     - config
     - kernel
@@ -472,6 +1260,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -484,6 +1273,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -495,6 +1285,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -508,6 +1299,46 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig: imx_v4_v5_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig: omap2plus_defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig:
+    - multi_v7_defconfig
+    - CONFIG_ARM_LPAE=y
+    - CONFIG_UNWINDER_FRAME_POINTER=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -518,6 +1349,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -532,6 +1364,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -541,6 +1374,70 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_SW_TAGS=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: hexagon
+    toolchain: clang-11
+    kconfig: defconfig
     targets:
     - config
     - kernel
@@ -576,6 +1473,7 @@ sets:
     make_variables:
       LD: mips-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -590,6 +1488,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -601,7 +1500,9 @@ sets:
     - modules
     kernel_image: zImage.epapr
     make_variables:
+      LD: powerpc64le-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: riscv
@@ -618,15 +1519,6 @@ sets:
       LD: riscv64-linux-gnu-ld
       LLVM: 1
       LLVM_IAS: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: s390
-    toolchain: clang-11
-    kconfig: defconfig
-    targets:
-    - config
-    - kernel
-    - modules
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -660,6 +1552,53 @@ sets:
     kconfig:
     - defconfig
     - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_KASAN=y
+    - CONFIG_KASAN_KUNIT_TEST=y
+    - CONFIG_KASAN_VMALLOC=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_KCSAN=y
+    - CONFIG_KCSAN_KUNIT_TEST=y
+    - CONFIG_KUNIT=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig:
+    - defconfig
+    - CONFIG_UBSAN=y
     targets:
     - config
     - kernel
@@ -679,6 +1618,7 @@ sets:
     - dtbs
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -692,6 +1632,7 @@ sets:
     make_variables:
       LD: arm-linux-gnueabihf-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -703,6 +1644,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -716,6 +1658,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -727,6 +1670,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: i386
@@ -738,6 +1682,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -754,6 +1699,7 @@ sets:
     make_variables:
       LD: mips-linux-gnu-ld
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: mips
@@ -768,6 +1714,7 @@ sets:
     kernel_image: vmlinux
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: powerpc
@@ -779,16 +1726,9 @@ sets:
     - modules
     kernel_image: zImage.epapr
     make_variables:
+      LD: powerpc64le-linux-gnu-ld
       LLVM: 1
-  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-    git_ref: master
-    target_arch: s390
-    toolchain: clang-10
-    kconfig: defconfig
-    targets:
-    - config
-    - kernel
-    - modules
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -800,6 +1740,637 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
+- name: distribution_configs
+  builds:
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-nightly
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-nightly
+    kconfig:
+    - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
+    - CONFIG_DEBUG_INFO_BTF=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-nightly
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-nightly
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-nightly
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-nightly
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: s390
+    toolchain: clang-nightly
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: s390
+    toolchain: clang-nightly
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-nightly
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
+    - CONFIG_DEBUG_INFO_BTF=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-13
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-13
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-13
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: s390
+    toolchain: clang-13
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: s390
+    toolchain: clang-13
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-12
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-12
+    kconfig:
+    - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
+    - CONFIG_DEBUG_INFO_BTF=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-12
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-12
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-12
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-12
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-12
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-11
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-11
+    kconfig:
+    - https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default
+    - CONFIG_DEBUG_INFO_BTF=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-11
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config
+    - CONFIG_ATOMIC64_SELFTEST=n
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: i386
+    toolchain: clang-11
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-11
+    kconfig:
+    - https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config
+    - CONFIG_BPF_PRELOAD=n
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: powerpc
+    toolchain: clang-11
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: zImage.epapr
+    make_variables:
+      LLVM_IAS: 0
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-11
+    kconfig: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
 - name: allconfigs
   builds:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -813,6 +2384,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -836,6 +2408,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -846,6 +2419,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -862,6 +2436,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -885,6 +2460,20 @@ sets:
     - config
     - kernel
     - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: riscv
+    toolchain: clang-nightly
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
     make_variables:
       LLVM: 1
       LLVM_IAS: 1
@@ -943,6 +2532,162 @@ sets:
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: riscv
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig:
+    - allmodconfig
+    - CONFIG_GCOV_KERNEL=n
+    - CONFIG_KASAN=n
+    - CONFIG_LTO_CLANG_THIN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: x86_64
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: arm
     toolchain: clang-12
     kconfig: allmodconfig
     targets:
@@ -951,6 +2696,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -962,6 +2708,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -973,6 +2720,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -983,6 +2731,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -999,6 +2748,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -1023,8 +2773,22 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: riscv
+    toolchain: clang-12
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -1088,6 +2852,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -1099,6 +2864,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -1110,6 +2876,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -1120,6 +2887,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -1136,6 +2904,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
@@ -1160,8 +2929,22 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    git_ref: master
+    target_arch: riscv
+    toolchain: clang-11
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    kernel_image: Image
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -1225,6 +3008,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -1236,6 +3020,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm
@@ -1247,6 +3032,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: arm64
@@ -1258,6 +3044,7 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git_ref: master
     target_arch: x86_64
@@ -1269,4 +3056,5 @@ sets:
     - modules
     make_variables:
       LLVM: 1
+      LLVM_IAS: 0
 

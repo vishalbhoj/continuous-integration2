@@ -13,7 +13,7 @@ name: next
     - tuxsuite/next.tux.yml
     - .github/workflows/next.yml
   schedule:
-  - cron: 0 8 * * 1,2,3,4,5
+  - cron: 0 12 * * 1,2,3,4,5
   workflow_dispatch: null
 jobs:
   kick_tuxsuite_defconfigs:
@@ -30,7 +30,659 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: builds.json
-        name: output_artifact
+        name: output_artifact_defconfigs
+        if-no-files-found: error
+  _51f130b3d4f18f133015f1d5f8557347:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 multi_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _7025b9cca86e3d1ed318dfd657760cf0:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 aspeed_g5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: aspeed_g5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _36f32fc7475ea4055ad18f64cc346a50:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 multi_v7_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _067b9930a3e9598b615dddd9bd3a7271:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _77a0d35af6c7fed89e053dcfab84925b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 imx_v4_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: imx_v4_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _ab0bf8748fd8f4b0565b2adfad3a766b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 omap2plus_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: omap2plus_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _701d5da388f5ff5a9c24135f7d5d3319:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _8b6514fc2e63bf7f97f781e252c04550:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _93edda8d8511b7a181ff233017422068:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_CPU_BIG_ENDIAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _74abf9fa882dcc857d6c2466f2ba12ce:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_LTO_CLANG_FULL=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _894eb8906f74373440e8747a8ab39cd0:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _553455d03b7c25e288fc6b52b4ebb19c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _ce3f939aec6799251fbd6e547e665de5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _368fd8c8a0937e87988ca1953603fba7:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _4f49cdf4810e4ed77e967b7de234e9de:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _1737f64aa8dfd9b268ee9d9dfa986b49:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
+    env:
+      ARCH: hexagon
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6b9b48c5ca690a81c94f317d6baf1765:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
+    env:
+      ARCH: i386
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _9192a16443a58cecb588e3133703784b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    env:
+      ARCH: mips
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _76cb9685d983e2138315f2720a881b3e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    env:
+      ARCH: mips
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _21120d396d88027038271a19c433b2ea:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=14 ppc44x_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: ppc44x_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _af95a74284c16095054973d1123dd365:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=14 pseries_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: pseries_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _58f0a88b2eb14c651a657df2ed1232ce:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=14 powernv_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: powernv_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _305fdf61b897cec0194ff01fd87104e9:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _ce0af404b66e66fab0051752de993c24:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 defconfig
+    env:
+      ARCH: s390
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f83a8a60320f3abf313f8a5759c5391c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _8eae26c36f9690d5c06516802781548c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_LTO_CLANG_FULL=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e61d193cdfb241d75eddf21c1cb786c5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a620b10d745209f3b7f6471008794e3b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a42fdc986d8f2bc85a4b986d38433406:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f250257311b809530b5011a957a3f375:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _453bc32df16052982f3c33722cac3a3a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
   _1158c1dfe5f9fcc225240c547be18fda:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
@@ -47,13 +699,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _55053058bd54acae6c4c7812c32270f7:
+  _3dcc2dad9e1ef4e6a3f358ffef73f7fe:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=13 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -66,7 +720,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _9532604fe2c353a710edd757453b4457:
@@ -85,7 +741,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _f312f8cee59fa1e3e85e4b3262690a47:
@@ -104,7 +762,72 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e3d4670a9d16ba924426904627be1c21:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 imx_v4_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: imx_v4_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _35cea70f2251d0631c8724eebdd1a1f1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 omap2plus_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: omap2plus_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a626e641850a6dd63ebbb6625691b9bc:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _210faf86b075b31ec48b4fa5276daa01:
@@ -123,7 +846,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _63a33d081dc4000b2eaf65e367d99441:
@@ -142,7 +867,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _db43a82d57f22c3d14f773847535c8d4:
@@ -161,7 +888,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _8fbad23db8694016590b623a4a748b10:
@@ -180,7 +909,114 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0727f525f2017b393835d55bbffbb6ab:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6260e216d2cb5ff467f4ec71a6822fe9:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _cf54612c535ab9afe353aed090fa234d:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _4a0461637a204ca69224c82f62ab78d2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e23f00f1b9cec9a3a69e648c386400ad:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
+    env:
+      ARCH: hexagon
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _7dde147b804e95998e110f5dfe487e8f:
@@ -199,13 +1035,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _dd0abd18f6fb089956a0981751bc6b0c:
+  _41bfb2f60b3f93f83d0159ac988829d1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 13
@@ -218,13 +1056,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4cbced3108106eb3201bf12eab9e65eb:
+  _e584cbd03ae7b4888ad3d4444ace58d7:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 13
@@ -237,13 +1077,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _3ff9dd832a367410f07232e142fa8650:
+  _48a57be25b36aba020e19ff27fcc54a4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 ppc44x_defconfig
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -256,13 +1098,36 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _069dcf551c46228c7070e4764927aa88:
+  _c0b585545a490a64b13d51c861610e3c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=13 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=13 pseries_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: pseries_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _848b558acb7e2487ba2d59cd1a85aa7a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=13 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 13
@@ -275,32 +1140,36 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ea24606870e91e9589c8b50eea55772a:
+  _4908c92c4d725c03f7b7115b6b457e9e:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=riscv LLVM=1 LD=riscv64-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_EFI=n
+    name: ARCH=riscv LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig
     env:
       ARCH: riscv
       LLVM_VERSION: 13
       INSTALL_DEPS: 1
       BOOT: 1
-      CONFIG: defconfig+CONFIG_EFI=n
+      CONFIG: defconfig
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fee5569ddd8b71b19e7fb517769de851:
+  _5efcbae1959e140c37060595422c0e64:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=13 defconfig
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 defconfig
     env:
       ARCH: s390
       LLVM_VERSION: 13
@@ -313,7 +1182,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _5725232ce5f790d6db053c3d226eead6:
@@ -332,7 +1203,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _0c554830a7608800ee581090e7c68ae2:
@@ -351,7 +1224,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _40472006bdaaeeebdb5591dd0d8287f8:
@@ -370,7 +1245,72 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a511dcc1062022a2d34af1759c1f94db:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _00dbff809f200680d6649ddf91c3ef28:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _344c3215d0ddd4bcd3ad90425d833033:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _044b68165327772b2a5ec251950105f5:
@@ -389,13 +1329,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a11abf02e18322177d92417220207cb8:
+  _39967e62e3e6ddc7694ef9844103270f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -408,13 +1350,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _6f7c758da41b41b25476334cfd2afd0e:
+  _2d617a0693d6cbc319274e7d1a888bc5:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -427,13 +1371,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _60ecbb939df9a7399fa560fa887f0132:
+  _fa79ae3dbe7872500bce9bf269972939:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -446,13 +1392,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _267d8195f8748ce0c5d40740008e5dde:
+  _770b21725a2daf535b47afe6f68001bc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -465,7 +1413,72 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a980878231cd6e2db930c1452d3825c2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 imx_v4_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: imx_v4_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _aa063a2bed61222ee081b8f9d5cef4bb:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 omap2plus_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: omap2plus_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _c13599a70b23e23c511f4c327c9aea77:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _4e7d23e292f62a4082a1d093ce1ae4f3:
@@ -484,7 +1497,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _692c30a6d87ab670b58ed3f16621db54:
@@ -503,7 +1518,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _898799d6a651bf4dfbea81a2459ce7ed:
@@ -522,7 +1539,114 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _8c5abf2855f7fef8f5d67ba30dcc77b2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y+CONFIG_CFI_CLANG=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _327acfd14f0ecf18c6c0081651c20370:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _699d70a50776211d29041fd5ca9f26fd:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bd47bfa9450a330ae72ee5e3cab687b4:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e7c5cf48eb39a0ec57c7b51ec921b5e1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig
+    env:
+      ARCH: hexagon
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _300d5ea669ce6bad5b1433d2643b416d:
@@ -541,13 +1665,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _2e8125b1f3df9bc77d92a930d41f4782:
+  _4609cd6605cdb5fcdc499135e04aeefc:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=12 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_IAS=1 LLVM_VERSION=12 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 12
@@ -560,13 +1686,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _106d267c84f6ece7cf9710a2cb351c6d:
+  _5a7ba1119c304ff5ab69c3d403de55d6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=12 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 12
@@ -579,18 +1707,20 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a3bacbe25d9b5eb02296db0c021ec75c:
+  _6a30520d164c342e0191a1a2f5c3ae67:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 ppc44x_defconfig
+    name: ARCH=powerpc BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 ppc44x_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
       INSTALL_DEPS: 1
-      BOOT: 1
+      BOOT: 0
       CONFIG: ppc44x_defconfig
     steps:
     - uses: actions/checkout@v2
@@ -598,13 +1728,36 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4929805e7a2ad956b20f06354ba6557f:
+  _2731e549c1005e11869f2cbf544e46e1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=12 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=12 pseries_defconfig
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: pseries_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e7d400a7f60ea696f730ba8de7f3d281:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=powerpc LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 12
@@ -617,7 +1770,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _49b8454e1fcf8ba7fc36c5f5e6cc5299:
@@ -636,26 +1791,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
-  _efcb2e4e81eb80fd4fdf114ea0296d0c:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=12 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 12
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _d49633cca166398690b1f3ecad135a14:
@@ -674,7 +1812,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _1fdd7b9c9390f3aadf41e6a594f3b6a6:
@@ -693,7 +1833,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _c3c1abe5972bc7450bb77c614752b748:
@@ -712,13 +1854,78 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _326167b20a9a6ecc06fa9d1b2aba10f3:
+  _fab76df94ff9b196674728ba7b78baaa:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v5_defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a1ed91e608a88b5870fe64cc8dc444da:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _ff24010ae8a508748c35423fb07cc9a6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _3ae3531548c624e92b5e217f7cebdcc2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -731,13 +1938,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _c60cf38875a5399afa4b11ba4d6ef6a7:
+  _75528eaffeb79bcc9118acaee19466a9:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -750,13 +1959,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e568393d55ec884da44c831f42852904:
+  _f045ace3044bbc7c295921e10b3bc6d1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -769,13 +1980,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _f32548095474a8341719241e481106cd:
+  _27376e72305e073694aefb13f554665f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -788,7 +2001,72 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _050101081cc5af5e12c7347491bfbb57:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 imx_v4_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: imx_v4_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _1ae1af112dbdceec19311ed66924bb9a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 omap2plus_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: omap2plus_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _4afa87435ae9249b1597002b8bed68d2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_ARM_LPAE=y+CONFIG_UNWINDER_FRAME_POINTER=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _1062027f7e3ec07f068a39cf6d23fd8a:
@@ -807,7 +2085,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _c582f95a9064a0375b287013fb51d6ec:
@@ -826,7 +2106,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _042b760d443056f07b0d0652b83237b7:
@@ -845,7 +2127,93 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _cb277ab066f41ea2734315fd1f98cf92:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _63fd664fc5f0f7f6089936a2813611b3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_SW_TAGS=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _472c560cf0d643991231321925d23b7b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f9f79b9f447e3c9e709435e7975747ca:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=hexagon BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig
+    env:
+      ARCH: hexagon
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _6b25347145c5e89e498ca11233af4912:
@@ -864,13 +2232,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _d5751ecccab4f8123d49f1ff7e7c87f5:
+  _772f9a8c79e52c6ee000b01cab13b4f6:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 11
@@ -883,13 +2253,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _4199aee554a613fda64b1eacc81b5add:
+  _91bbbe2f66767e2566aad8a1f0e4ada4:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 11
@@ -902,13 +2274,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _8190461c1f8057e418b9abae5f927a20:
+  _e96b0d0f9698e45a12b0f7d394eaa634:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=11 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=11 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 11
@@ -921,7 +2295,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _94771c21f822e6468d29dfe9257e8207:
@@ -940,26 +2316,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
-  _aab5675f3f257b359acd5cbd9b06b94f:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=11 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 11
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _73f8d728902a8cc9c807d77d1aaaedaf:
@@ -978,7 +2337,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _044e8dd49b6c5811b16c225999f10f9c:
@@ -997,7 +2358,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _d6ee0f1b2b09bec4fb0fb6707d7213a4:
@@ -1016,13 +2379,78 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _fd8f5d7d3d038c2feafce905c5abfb27:
+  _2faaeb3f101fe6c85259b03d7ea27c6c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v5_defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KASAN=y+CONFIG_KASAN_KUNIT_TEST=y+CONFIG_KASAN_VMALLOC=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _d96bd50ae5d3b686d4e5bd8c1947c98f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_KCSAN=y+CONFIG_KCSAN_KUNIT_TEST=y+CONFIG_KUNIT=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dbc871074c8f7ea6dab3770e905cd066:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 defconfig+CONFIG_UBSAN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_UBSAN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6692825e3a7b84aa03ce5982176b9200:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 multi_v5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1035,13 +2463,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a751f22e6ba9bbdb1039ee3895125370:
+  _7ce6505ac8e3234bf7f120923864f556:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LD=arm-linux-gnueabihf-ld LLVM_VERSION=10 aspeed_g5_defconfig
+    name: ARCH=arm LLVM=1 LD=arm-linux-gnueabihf-ld LLVM_IAS=0 LLVM_VERSION=10 aspeed_g5_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1054,13 +2484,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _929ef902a624959eb09c397923751212:
+  _8d4c408eb0725ebb7d15550f73f0d1af:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v7_defconfig
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 multi_v7_defconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1073,13 +2505,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _63a27c3bcba04fab80b30ca454b2a2a9:
+  _907678d6077bc2f81d0595856d171e8c:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm LLVM=1 LLVM_VERSION=10 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1092,13 +2526,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _9a919af0584ad3314340747afd5e7e03:
+  _137b9762bccbb06542ad04fc36291b3b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=arm64 LLVM=1 LLVM_VERSION=10 defconfig
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 10
@@ -1111,13 +2547,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _eabd42e7d56b3a0a9c15e6397695d96d:
+  _29bfb1df7da745aeb69bab0885f5ed33:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=i386 LLVM=1 LLVM_VERSION=10 defconfig
+    name: ARCH=i386 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
     env:
       ARCH: i386
       LLVM_VERSION: 10
@@ -1130,13 +2568,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _020e9ff944ea1e8472762c351ebd39dd:
+  _498b595c528a335a6f8a07ad5a1e04a1:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
+    name: ARCH=mips LLVM=1 LD=mips-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y+CONFIG_CPU_BIG_ENDIAN=y
     env:
       ARCH: mips
       LLVM_VERSION: 10
@@ -1149,13 +2589,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _bc8fce7c23996324100110dee4d6e7b6:
+  _edab6b2cb7f6bf3b3449fd8b1d3c9e3f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=mips LLVM=1 LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
+    name: ARCH=mips LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 malta_defconfig+CONFIG_BLK_DEV_INITRD=y
     env:
       ARCH: mips
       LLVM_VERSION: 10
@@ -1168,13 +2610,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _f858b2a83b07d7945ea319b9b2400c63:
+  _f5f31e26bad48603013ba892645efe90:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=powerpc LLVM=1 LLVM_VERSION=10 powernv_defconfig
+    name: ARCH=powerpc LLVM=1 LD=powerpc64le-linux-gnu-ld LLVM_IAS=0 LLVM_VERSION=10 powernv_defconfig
     env:
       ARCH: powerpc
       LLVM_VERSION: 10
@@ -1187,32 +2631,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _77129a466d7b015c998bbca441d09b93:
+  _f88da53785133963cbd4590f904b7a18:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_defconfigs
-    name: ARCH=s390 CC=clang LLVM_VERSION=10 defconfig
-    env:
-      ARCH: s390
-      LLVM_VERSION: 10
-      INSTALL_DEPS: 1
-      BOOT: 1
-      CONFIG: defconfig
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: actions/download-artifact@v2
-      with:
-        name: output_artifact
-    - name: Boot Test
-      run: ./check_logs.py
-  _470bd3fa38c92f94b430e3a89466a304:
-    runs-on: ubuntu-20.04
-    needs: kick_tuxsuite_defconfigs
-    name: ARCH=x86_64 LLVM=1 LLVM_VERSION=10 defconfig
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 defconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 10
@@ -1225,7 +2652,1285 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _33f756a58e3f44713fbcc5d419f54896:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a82d5da76edb25de07265b1189803b21:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=android aspeed_g5_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: aspeed_g5_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _87ceb80e8738ca51446e7e1857d39b9c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v7_defconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _351114799740fe3119a3b2ce6956a6bb:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=android multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: multi_v7_defconfig+CONFIG_THUMB2_KERNEL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _300e2471179b5487f89662afe7517d23:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _012f9698c8641a28bfe42b1f88c3eeed:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_FULL=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f3ec5ce2d1407ab879240659d45e691f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _d40fba30474edc6e71babdc5032a19a1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig
+    env:
+      ARCH: i386
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _3ad4a25550173087651ae615332210cb:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _3a8042d5be17096e2036e17595de3dc2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_FULL=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_FULL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _d405aef26ef8bf6ad44a5b678b109329:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _b0ecbe2a369a0aaf6357ba0cbe25a175:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_defconfigs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: defconfig+CONFIG_GCOV_KERNEL=y+CONFIG_GCOV_PROFILE_ALL=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_defconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  kick_tuxsuite_distribution_configs:
+    name: TuxSuite (distribution_configs)
+    runs-on: ubuntu-20.04
+    container: tuxsuite/tuxsuite
+    env:
+      TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: tuxsuite
+      run: tuxsuite build-set --set-name distribution_configs --json-out builds.json --tux-config tuxsuite/next.tux.yml || true
+    - name: save output
+      uses: actions/upload-artifact@v2
+      with:
+        path: builds.json
+        name: output_artifact_distribution_configs
+        if-no-files-found: error
+  _9417efa1a2a916b417a8798be9c16791:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f68ffc140cb41005f45ddf889b6a0d4b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _621b2a474cb5c9a9224adf1ab39c6263:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _11ad024a78719b99adcd1e644afc9fd0:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _56e6880015e5f4109c6aaf83e07bfcc5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _acd418378c0559207a0517e13bee439a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _aee5ba6d550b366b3aadb4a0bfd9906e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e8fe479b70c34d11aad415d50bf69af1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dde2b10dd09a89c70b6a2be1755c8a0f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: s390
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6161e9074b74a20558e1cbad2b391df3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    env:
+      ARCH: s390
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _4295d6942bf6d93fad93458fcc60d014:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bd6bf8eb7ad8d3024a2701877fa59e3f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e5847df4ed51e927f78146158a6b23e7:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _2dd1b5be6535967701a383add1a82022:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _1435de1ebd93ba0b4f841682571dd69b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0ed6feea25f3902a8c968a744a0240f2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dfc9970609310645c60d53981a32a0e3:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a16d4940633b739bdef0667943f0b9a8:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a806c79f399d017938fc07b0c8ab38ac:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _17f0345420b6ade6aeacc3497eb5fe79:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _409b28e38bc385e6d3d3068f3489ea8c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _306cd6f0d8de501c4ecfdc903ce9f4a1:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: s390
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-s390x-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _20c70aed2de0e5913ffc04e55d5b2480:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=s390 CC=clang LLVM_IAS=0 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    env:
+      ARCH: s390
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/s390x/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _cd3a9116f9c669b21bb4476766660a71:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _1eb07c3aa26899e71a54a11f89ca7e32:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e62bd1fdb88a0712c30c1204bd627466:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _5956d62ae6edadd4596591a4267ef913:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _c65a27b37c5a7caf522020d62a097166:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0a44165bfd4228a9d39675e56d3c53cd:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6ae741efccfa2695b3ccecad36497666:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _d1e2b995470e409e284ae6dadbf703a6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bf9bb3c64ad778b54ba684acca2dfd0e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6f15f90c890fd785747516d4c39c77a6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a1c5ea612cdbf834b80c6187336f6949:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _6f25f53bece84b18b9d20700a1a6cba2:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _7c8ef3a6268a98f6b98b58a56bd4164e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _2e27aae6c7af96a6e71e587a8821c0b6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=12 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _9787aef428bca7a8aa1b80968a889942:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-armv7hl-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _a56d649bf59d04b145998497ffd3d36c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    env:
+      ARCH: arm
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/armv7hl/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _9f6b4e77f8d82842e93b9fa15e162f15:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-aarch64-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _454027d957e18d9446250bb284322ced:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=arm64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/arm64/default+CONFIG_DEBUG_INFO_BTF=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _09238b29fc27aba9cd6fbf0fc8ae74fa:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: i386
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-i686-fedora.config+CONFIG_ATOMIC64_SELFTEST=n+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e354fa32480781c0b26f27b46a1cf7cd:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=i386 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    env:
+      ARCH: i386
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/i386/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _33c4e124f55a998679c38207caccf044:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-ppc64le-fedora.config+CONFIG_BPF_PRELOAD=n
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _25f87da1043f926ba53aee8e9493b399:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=powerpc CC=clang LLVM_IAS=0 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    env:
+      ARCH: powerpc
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/ppc64le/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _8f357523d123bc85ac5e9d9a752e8a17:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/archlinux/svntogit-packages/raw/packages/linux/trunk/config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _dcce07616b216e4083cf8d3583f67061:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://src.fedoraproject.org/rpms/kernel/raw/rawhide/f/kernel-x86_64-fedora.config
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _bc9a67d0e7f6688b7d9750c9eacca429:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_distribution_configs
+    name: ARCH=x86_64 LLVM=1 LLVM_IAS=1 LLVM_VERSION=11 https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 1
+      CONFIG: https://github.com/openSUSE/kernel-source/raw/master/config/x86_64/default
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_distribution_configs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   kick_tuxsuite_allconfigs:
@@ -1242,11 +3947,264 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: builds.json
-        name: output_artifact
-  _b6004055e739b487ac5b79a2ecd21871:
+        name: output_artifact_allconfigs
+        if-no-files-found: error
+  _017ca86b3e71799d51de2c8afd81c60b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f647a37c2d5c59b19bff84c11bd793c9:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allnoconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _914ab545990915881ac056c4d869e1f6:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allyesconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _efbb08e8e064234fb6815e8f0019fb48:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e626e8d9489fb8d26a2ceee9cf596dc5:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _976ece933bfbe5af275116ee6081c39c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allnoconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _cd3b353c4d93128d6d06d81e4df38d43:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allyesconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _29621856361ed320d093c47e1d789771:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _fe2c9057aa7118b7ceddc2c7bbdc8e2d:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _fabeff65b904378ceac6cc67064323fe:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _8d8410b3d3cd0717d60c680bff498577:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allnoconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _fb32e519cea6f2c116bd013eec8409de:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=14 allyesconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: 14
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _697acf7d42a48e3722c6145f69814f68:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1259,7 +4217,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _e3671bdb6f10d3349593b86cc9b324f6:
@@ -1278,13 +4238,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a17601dec744d5d8c2a4a9c67b744b30:
+  _3c8f7d269bad99a182ef6b8286ce326b:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=13 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 13
@@ -1297,7 +4259,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _bc93ab0a758b33cf3167fdbdeb2b0705:
@@ -1316,7 +4280,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _d6ae4ccd325979d638473228b3dd8c17:
@@ -1335,7 +4301,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _c8ae7dd017d7273dcec747aadd9288fe:
@@ -1354,7 +4322,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _a575b3a0efaafab3765963157dfe45f2:
@@ -1373,7 +4343,30 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _3466aa72f105769b96bdc3e356c9d91a:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=13 allmodconfig
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 13
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _ff86d54e6acbce65590f71efbb2f826b:
@@ -1392,7 +4385,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _51db4df26ea58b68c19901411e605b2e:
@@ -1411,7 +4406,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _10bc1944d6f5f29611271ddc67d9e2bd:
@@ -1430,7 +4427,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _02922017f2cb19d45aba8492132c7804:
@@ -1449,13 +4448,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _e0faf7981c78617941c48bb39357dfa5:
+  _8a7f0138d12509886a29c0b8b2b90e80:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -1468,13 +4469,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a3c122fc012130191ce34a8fc1ed2809:
+  _83e582866c8e77c704428984335400c0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -1487,13 +4490,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ac352b89ff0b84ba7baaec44be7d4fd9:
+  _f67567decbe181f7dac1cebae6b752c2:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=12 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 12
@@ -1506,7 +4511,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _40d38df5fba1ddfc0ada216733994225:
@@ -1525,7 +4532,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _52911b17aeee5908f851ff37465065e7:
@@ -1544,7 +4553,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _02542a0d531fabec931217c22d933bbe:
@@ -1563,7 +4574,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _49b1b3bdbd9a67648407749094c083d4:
@@ -1582,7 +4595,30 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0445e3ea394f4e6c3ab23a8dfa84d3e4:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=12 allmodconfig
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 12
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _ae767e9ca71f590a84808a724ec476e4:
@@ -1601,7 +4637,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _2dc2c1c0431802a1cd5273e93cf3a433:
@@ -1620,7 +4658,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _78a1c189b48cf1440cdce261b5ec5efe:
@@ -1639,7 +4679,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _2dff3a82fb364654e103e70b4b546e45:
@@ -1658,13 +4700,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _79c2e713ed9fc3c4381862731d8a664a:
+  _565b3ebd0db7f13bc44114dbc4ce6faa:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1677,13 +4721,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _56d21d0eba24aae15e0e7ba0cdd3e62a:
+  _98be35eea81be1fc7cfea5f125dacb85:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1696,13 +4742,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ee24c08b15f5892fb5e38906315c0280:
+  _e4b5a7cb392bd67d52690ece87b3e80f:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=11 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 11
@@ -1715,7 +4763,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _51e2eff457ec186a91964ee9c06f04f3:
@@ -1734,7 +4784,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _5eef23383e7e212e3e1b286524ee0926:
@@ -1753,7 +4805,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _399a468064cf545cce40196c96162888:
@@ -1772,7 +4826,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _8c8559e2e509a14a717cee01ec90bd39:
@@ -1791,7 +4847,30 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _c71a33af9a96021296554421ae3e3cfb:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=riscv BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=11 allmodconfig
+    env:
+      ARCH: riscv
+      LLVM_VERSION: 11
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _315a83fa22517db93a5781d3052eb372:
@@ -1810,7 +4889,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _ad4a14cfdd7a60aff188af10540352b6:
@@ -1829,7 +4910,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _d5032c6b0134fa08249732baa271b04a:
@@ -1848,7 +4931,9 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
   _f93dc26c868cb14278bd57d172f7b70e:
@@ -1867,13 +4952,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _ddf8469de853cf3933134d74e60236c8:
+  _56f04e51c99a42d025a820038622edb0:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=10 allmodconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allmodconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1886,13 +4973,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _2583338fda83d6bb9e0812d6893b5e66:
+  _b608d3f0e09f3a645090be6332486080:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=10 allnoconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allnoconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1905,13 +4994,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _bdbb31074288296e76bd079fa36d9c51:
+  _bc95ad4fabbd7c72e2ce72553f0aa944:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm BOOT=0 LLVM=1 LLVM_VERSION=10 allyesconfig
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allyesconfig
     env:
       ARCH: arm
       LLVM_VERSION: 10
@@ -1924,13 +5015,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _a378f3a9640f6d51ad394cfd3e58cdcf:
+  _24ddbfe1b6a9f253ab32bd9549a4dab3:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_VERSION=10 allnoconfig
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allnoconfig
     env:
       ARCH: arm64
       LLVM_VERSION: 10
@@ -1943,13 +5036,15 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
-  _7404b0f622477899bc4752b39f7c92fe:
+  _c8dc16fb21bddc7841fe84996396c772:
     runs-on: ubuntu-20.04
     needs: kick_tuxsuite_allconfigs
-    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_VERSION=10 allnoconfig
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=10 allnoconfig
     env:
       ARCH: x86_64
       LLVM_VERSION: 10
@@ -1962,7 +5057,240 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@v2
       with:
-        name: output_artifact
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _b79dc2edc3fda12d85ac78ca2b081960:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=android allmodconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0bd45e7bf965a5baf08290e2f1592b0e:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allnoconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _eef2fa4c94ab7adb8bb82dd2c8595893:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm BOOT=0 LLVM=1 LLVM_IAS=0 LLVM_VERSION=android allyesconfig
+    env:
+      ARCH: arm
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _0a2662d69f899d9d4f0fecc38bed6d41:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _509b45bccf9f9caab84def233b90d81b:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _b0fbaba94853b2f26c458cd0c3b95f2f:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allnoconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e357ce8f7d2d716ba07663203d18eb52:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=arm64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allyesconfig
+    env:
+      ARCH: arm64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _e38e51bfe42f6ce103710889aa946c01:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _f7ee75927f0273e4652c17902a6dc812:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allmodconfig+CONFIG_GCOV_KERNEL=n+CONFIG_KASAN=n+CONFIG_LTO_CLANG_THIN=y
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _00318ac7d697c430359de1e4e903d7eb:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allnoconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allnoconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
+    - name: Boot Test
+      run: ./check_logs.py
+  _19dd04f50424074ba37661160bf0204c:
+    runs-on: ubuntu-20.04
+    needs: kick_tuxsuite_allconfigs
+    name: ARCH=x86_64 BOOT=0 LLVM=1 LLVM_IAS=1 LLVM_VERSION=android allyesconfig
+    env:
+      ARCH: x86_64
+      LLVM_VERSION: android
+      INSTALL_DEPS: 1
+      BOOT: 0
+      CONFIG: allyesconfig
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/download-artifact@v2
+      with:
+        name: output_artifact_allconfigs
+    - name: Register clang error/warning problem matcher
+      run: echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"
     - name: Boot Test
       run: ./check_logs.py
 

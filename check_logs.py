@@ -66,7 +66,7 @@ def cwd():
     return os.getcwd()
 
 
-def run_boot():
+def run_boot(build):
     cbl_arch = get_cbl_name()
     kernel_image = cwd() + "/" + get_image_name()
     boot_qemu = [
@@ -74,6 +74,12 @@ def run_boot():
     ]
     if cbl_arch == "s390":
         boot_qemu += ["--use-cbl-qemu"]
+    # If we are running a sanitizer build, we should increase the number of
+    # cores and timeout because booting is much slower
+    if "CONFIG_KASAN=y" in build["kconfig"] or \
+       "CONFIG_KCSAN=y" in build["kconfig"] or \
+       "CONFIG_UBSAN=y" in build["kconfig"]:
+        boot_qemu += ["-s", "4", "-t", "10m"]
     try:
         subprocess.run(boot_qemu, check=True)
     except subprocess.CalledProcessError as e:
@@ -83,15 +89,16 @@ def run_boot():
 
 
 def boot_test(build):
-    if build["errors_count"] > 0:
-        print_red("errors encountered during build, skipping boot")
+    if build["result"] == "fail":
+        print_red("fatal build errors encountered during build, skipping boot")
         sys.exit(1)
     if "BOOT" in os.environ and os.environ["BOOT"] == "0":
         print_yellow("boot test disabled via config, skipping boot")
         return
     fetch_kernel_image(build)
     fetch_dtb(build)
-    run_boot()
+    install_deps()
+    run_boot(build)
 
 
 if __name__ == "__main__":
@@ -102,5 +109,4 @@ if __name__ == "__main__":
     build = get_build()
     print(json.dumps(build, indent=4))
     check_log(build)
-    install_deps()
     boot_test(build)

@@ -16,12 +16,40 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
     git_ref: for-next/fixes
     target_arch: arm64
     toolchain: clang-nightly
+    kconfig:
+    - defconfig
+    - CONFIG_CPU_BIG_ENDIAN=y
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+    git_ref: for-next/fixes
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: defconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+    git_ref: for-next/fixes
+    target_arch: arm64
+    toolchain: clang-13
     kconfig:
     - defconfig
     - CONFIG_CPU_BIG_ENDIAN=y
@@ -42,6 +70,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
@@ -54,6 +83,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
 - name: allconfigs
@@ -68,6 +98,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
@@ -92,6 +123,45 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+    git_ref: for-next/fixes
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allmodconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+    git_ref: for-next/fixes
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allnoconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      LLVM: 1
+      LLVM_IAS: 1
+  - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
+    git_ref: for-next/fixes
+    target_arch: arm64
+    toolchain: clang-13
+    kconfig: allyesconfig
+    targets:
+    - config
+    - kernel
+    - modules
+    make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
@@ -104,6 +174,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
@@ -128,6 +199,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
@@ -140,6 +212,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
   - git_repo: https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git
@@ -164,6 +237,7 @@ sets:
     - kernel
     - modules
     make_variables:
+      CROSS_COMPILE_COMPAT: arm-linux-gnueabihf-
       LLVM: 1
       LLVM_IAS: 1
 

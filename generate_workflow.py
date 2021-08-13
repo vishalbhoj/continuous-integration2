@@ -81,12 +81,10 @@ def get_job_name(build):
     # If LD was specified, show what it is
     if "make_variables" in build and "LD" in build["make_variables"]:
         job += " LD=" + str(build["make_variables"]["LD"])
-    # LLVM_IAS=0 is the default. Only show when we have opted into LLVM_IAS.
-    if build["llvm_ias"]:
-        job += " LLVM_IAS=1"
+    job += " LLVM_IAS=" + str(build["make_variables"]["LLVM_IAS"])
     # Having "LLVM <VER>" is a little hard to parse, make it look like
     # an environment variable
-    job += " LLVM_VERSION=" + str(int(build["llvm_version"]))
+    job += " LLVM_VERSION=" + str(build["llvm_version"])
     job += " " + print_config(build)
     return job
 
@@ -119,7 +117,8 @@ def tuxsuite_setups(build_set, tuxsuite_yml):
                     "uses": "actions/upload-artifact@v2",
                     "with": {
                         "path": "builds.json",
-                        "name": "output_artifact"
+                        "name": "output_artifact_{}".format(build_set),
+                        "if-no-files-found": "error"
                     },
                 }
             ]
@@ -151,8 +150,12 @@ def get_steps(build, build_set):
                 {
                     "uses": "actions/download-artifact@v2",
                     "with": {
-                        "name": "output_artifact"
+                        "name": "output_artifact_{}".format(build_set)
                     },
+                },
+                {
+                    "name": "Register clang error/warning problem matcher",
+                    "run": 'echo "::add-matcher::.github/problem-matchers/clang-errors-warnings.json"'
                 },
                 {
                     "name": "Boot Test",
@@ -169,12 +172,16 @@ def print_builds(config, tree_name):
     github_yml = ".github/workflows/{}.yml".format(tree_name)
 
     check_logs_defconfigs = {}
+    check_logs_distribution_configs = {}
     check_logs_allconfigs = {}
     for build in config["builds"]:
         if build["git_repo"] == repo and build["git_ref"] == ref:
             cron_schedule = build["schedule"]
             if "defconfig" in str(build["config"]):
                 check_logs_defconfigs.update(get_steps(build, "defconfigs"))
+            elif "https://" in str(build["config"]):
+                check_logs_distribution_configs.update(
+                    get_steps(build, "distribution_configs"))
             else:
                 check_logs_allconfigs.update(get_steps(build, "allconfigs"))
 
@@ -182,6 +189,11 @@ def print_builds(config, tree_name):
                                 github_yml)
     workflow["jobs"].update(tuxsuite_setups("defconfigs", tuxsuite_yml))
     workflow["jobs"].update(check_logs_defconfigs)
+
+    if check_logs_distribution_configs:
+        workflow["jobs"].update(
+            tuxsuite_setups("distribution_configs", tuxsuite_yml))
+        workflow["jobs"].update(check_logs_distribution_configs)
 
     if check_logs_allconfigs:
         workflow["jobs"].update(tuxsuite_setups("allconfigs", tuxsuite_yml))

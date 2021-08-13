@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import argparse
-import yaml
+import pathlib
 import sys
+import yaml
 
 
 # Aliases makes this YAML unreadable
@@ -50,8 +51,11 @@ def emit_tuxsuite_yml(config, tree):
         ]
     } # yapf: disable
     repo, ref = get_repo_ref(config, tree)
-    max_version = max(config["llvm_versions"])
+    ci_folder = pathlib.Path(__file__).resolve().parent
+    with open(ci_folder.joinpath("LLVM_TOT_VERSION")) as f:
+        max_version = int(f.read())
     defconfigs = []
+    distribution_configs = []
     allconfigs = []
     for build in config["builds"]:
         if build["git_repo"] == repo and build["git_ref"] == ref:
@@ -76,10 +80,17 @@ def emit_tuxsuite_yml(config, tree):
 
             if "defconfig" in str(build["config"]):
                 defconfigs.append(current_build)
+            elif "https://" in str(build["config"]):
+                distribution_configs.append(current_build)
             else:
                 allconfigs.append(current_build)
 
     tuxsuite_buildset["sets"][0]["builds"] = defconfigs
+    if distribution_configs:
+        tuxsuite_buildset["sets"] += [{
+            "name": "distribution_configs",
+            "builds": distribution_configs
+        }]
     if allconfigs:
         tuxsuite_buildset["sets"] += [{
             "name": "allconfigs",
